@@ -1,6 +1,6 @@
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { getAllPlaygroundData } from '@/modules/dashboard/actions';
-import { DashboardSidebar } from '@/modules/dashboard/components/DashboardSidebar';
+import { DashboardSidebar } from '@/modules/dashboard/components/dashboard-sidebar';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const playgroundData = await getAllPlaygroundData();
@@ -18,8 +18,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     playgroundData?.map(item => ({
       id: item.id,
       name: item.title,
-      // todo: star
-      starred: false,
+      starred: item.starMarks?.[0]?.isMarked || false,
       icon: technologyIconMap[item.template] || 'Code2',
     })) || [];
 
