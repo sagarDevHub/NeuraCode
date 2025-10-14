@@ -92,6 +92,7 @@ model Playground {
   userId      String     @db.ObjectId
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   starMarks   StarMark[]
+  templateFiles TemplateFile[]
 
   @@index([userId])
   @@map("playgrounds")
@@ -108,4 +109,13 @@ model StarMark {
 
   @@unique([userId, playgroundId])
   @@map("starmarks")
+}
+
+model TemplateFile {
+  id String @id @default(cuid()) @map("_id")
+  content Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  playgroundId String @unique
+  playground Playground @relation(fields: [playgroundId], references: [id], onDelete: Cascade)
 }
