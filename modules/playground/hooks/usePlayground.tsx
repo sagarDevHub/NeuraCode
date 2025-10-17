@@ -5,7 +5,8 @@ import { getPlaygroundById, saveUpdatedCode } from '../actions';
 
 interface PlaygroundData {
   id: string;
-  name?: string;
+  title?: string;
+  templateFiles?: { content: string }[];
   [key: string]: any;
 }
 
